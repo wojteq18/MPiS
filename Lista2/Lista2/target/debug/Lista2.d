@@ -1,0 +1,1 @@
+/home/vostok/codes/MPiS/Lista2/Lista2/target/debug/Lista2: /home/vostok/codes/MPiS/Lista2/Lista2/src/bn.rs /home/vostok/codes/MPiS/Lista2/Lista2/src/cn.rs /home/vostok/codes/MPiS/Lista2/Lista2/src/main.rs
