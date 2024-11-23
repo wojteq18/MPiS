@@ -8,7 +8,7 @@ pub fn calculate_cn(n: usize, repeats: usize) -> Vec<usize>
 
     for _ in 0..repeats
     {
-        let mut isEmpty: usize = 0;
+        let mut is_empty: usize = 0;
         let mut urns = vec![0; n];
 
         for i in 1..
@@ -17,9 +17,9 @@ pub fn calculate_cn(n: usize, repeats: usize) -> Vec<usize>
             urns[urn] = urns[urn] + 1;
             if urns[urn] == 1
             {
-                isEmpty = isEmpty + 1;
+                is_empty = is_empty + 1;
             }
-            if isEmpty == n
+            if is_empty == n
             {
                 results.push(i);
                 break;
