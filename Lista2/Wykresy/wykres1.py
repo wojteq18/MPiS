@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 # Pobranie ścieżki do pliku od użytkownika
 file_path = input("Podaj ścieżkę do pliku .txt z danymi: ")
 
+# Pobranie tytułu od użytkownika
+plot_title = input("Podaj tytuł wykresu: ")
+
 try:
     # Wczytanie danych z pliku .txt
     data = pd.read_csv(file_path, sep=" ", names=["points", "estimate"], skiprows=0)
@@ -31,9 +34,9 @@ try:
     plt.scatter(mean_points, mean_estimates, color='red', s=50, zorder=5, label="Średnia")
 
     # Dodanie etykiet i tytułu
-    plt.xlabel("Liczba punktów")
-    plt.ylabel("Oszacowanie calki")
-    plt.title("Wykres oszacowania calki z uwzględnieniem średnich wartości")
+    plt.xlabel("Liczba urn")
+    plt.ylabel("Liczba losowań")
+    plt.title(plot_title)  # Użycie tytułu podanego przez użytkownika
     plt.legend()
     plt.grid(True)
 
