@@ -13,7 +13,7 @@ def plot_function_with_mean(n, y_values, latex_formula):
     # Wykres
     plt.figure(figsize=(10, 6))
     # Niebieskie punkty dla danych surowych
-    plt.scatter(n, y_values, color='blue', alpha=0.7, s=10, label="Dane surowe")
+    plt.scatter(n, y_values, color='blue', alpha=0.7, s=10)
     # Czerwone punkty dla średniej
     plt.scatter(mean_n, mean_y, color='red', label="Średnia", zorder=5, s=50)  # Średnia oznaczona czerwonymi kropkami
     plt.xlabel("n")  # Oś X opisana jako n

@@ -34,8 +34,8 @@ try:
     plt.scatter(mean_points, mean_estimates, color='red', s=50, zorder=5, label="Średnia")
 
     # Dodanie etykiet i tytułu
-    plt.xlabel("Liczba urn")
-    plt.ylabel("Liczba losowań")
+    plt.xlabel("n")
+    #plt.ylabel("Liczba losowań")
     plt.title(plot_title)  # Użycie tytułu podanego przez użytkownika
     plt.legend()
     plt.grid(True)
