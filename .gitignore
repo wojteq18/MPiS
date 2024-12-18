@@ -1,1 +1,2 @@
-/target
+# Ignorowanie target/ w każdym podkatalogu
+**/target/
