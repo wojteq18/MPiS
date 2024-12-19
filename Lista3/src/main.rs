@@ -11,44 +11,46 @@ pub fn calculate(n_values: Vec<usize>, repeats: usize) {
         let mut rng = Mt64::default();
 
         for _ in 0..repeats {
-            let mut urns = vec![0; n];
+            let mut urns_an = vec![0; n];
+            let mut urns_bn = vec![0; n];
             let mut max_balls_an = 0;
             let mut max_balls_bn = 0;
 
-            for i in 1..n {
-                // Obliczamy an - maksymalna liczba kul w urnie
+            // Obliczamy a_n (po prostu dodajemy kule do urn losowo)
+            for _ in 0..n {
                 let urn = rng.gen_range(0..n);
-                urns[urn] += 1;
-                if urns[urn] > max_balls_an {
-                    max_balls_an = urns[urn];
-                }
-
-                // Obliczamy bn - odejmujemy kulę dodaną, losujemy następną urnę i wybieramy, do której z tych dwóch ma trafić kula
-                urns[urn] -= 1;
-
-                let mut urn2;
-                loop {
-                    urn2 = rng.gen_range(0..n);
-                    if urn != urn2 {
-                        break; // Nie chcemy wylosować urny, którą już wylosowaliśmy
-                    }
-                }
-
-                if urns[urn2] > urns[urn] {
-                    urns[urn2] += 1;
-                } else {
-                    urns[urn] += 1;
-                }
-
-                if urns[urn] > urns[urn2] {
-                    if urns[urn] > max_balls_bn {
-                        max_balls_bn = urns[urn];
-                    }
-                } else if urns[urn2] > max_balls_bn {
-                    max_balls_bn = urns[urn2];
+                urns_an[urn] += 1;
+                if urns_an[urn] > max_balls_an {
+                    max_balls_an = urns_an[urn];
                 }
             }
 
+            // Obliczamy b_n (wrzucamy kule na podstawie reguły dwóch urn)
+            for _ in 0..n {
+                let urn1 = rng.gen_range(0..n);
+                let mut urn2;
+                loop {
+                    urn2 = rng.gen_range(0..n);
+                    if urn1 != urn2 {
+                        break;
+                    }
+                }
+
+                // Wybieramy urnę z mniejszą liczbą kul i dodajemy kulę
+                if urns_bn[urn1] <= urns_bn[urn2] {
+                    urns_bn[urn1] += 1;
+                    if urns_bn[urn1] > max_balls_bn {
+                        max_balls_bn = urns_bn[urn1];
+                    }
+                } else {
+                    urns_bn[urn2] += 1;
+                    if urns_bn[urn2] > max_balls_bn {
+                        max_balls_bn = urns_bn[urn2];
+                    }
+                }
+            }
+
+            // Zapisujemy wyniki
             writeln!(an_file, "{} {}", n, max_balls_an).unwrap();
             writeln!(bn_file, "{} {}", n, max_balls_bn).unwrap();
         }
