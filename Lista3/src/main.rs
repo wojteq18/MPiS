@@ -11,46 +11,44 @@ pub fn calculate(n_values: Vec<usize>, repeats: usize) {
         let mut rng = Mt64::default();
 
         for _ in 0..repeats {
-            let mut urns_an = vec![0; n];
+            let mut urns = vec![0; n];
             let mut urns_bn = vec![0; n];
             let mut max_balls_an = 0;
             let mut max_balls_bn = 0;
 
-            // Obliczamy a_n (po prostu dodajemy kule do urn losowo)
-            for _ in 0..n {
+            for _ in 1..n {
+                // Obliczamy an - maksymalna liczba kul w urnie
                 let urn = rng.gen_range(0..n);
-                urns_an[urn] += 1;
-                if urns_an[urn] > max_balls_an {
-                    max_balls_an = urns_an[urn];
+                urns[urn] += 1;
+                if urns[urn] > max_balls_an {
+                    max_balls_an = urns[urn];
                 }
-            }
 
-            // Obliczamy b_n (wrzucamy kule na podstawie reguły dwóch urn)
-            for _ in 0..n {
-                let urn1 = rng.gen_range(0..n);
+                //obliczamy bn
+                let mut urn1 = rng.gen_range(0..n);
                 let mut urn2;
                 loop {
                     urn2 = rng.gen_range(0..n);
                     if urn1 != urn2 {
-                        break;
+                        break; // Nie chcemy wylosować urny, którą już wylosowaliśmy
                     }
                 }
 
-                // Wybieramy urnę z mniejszą liczbą kul i dodajemy kulę
-                if urns_bn[urn1] <= urns_bn[urn2] {
+                if urns_bn[urn2] < urns_bn[urn1] {
+                    urns_bn[urn2] += 1;
+                } else {
                     urns_bn[urn1] += 1;
+                }
+
+                if urns_bn[urn1] > urns_bn[urn2] {
                     if urns_bn[urn1] > max_balls_bn {
                         max_balls_bn = urns_bn[urn1];
                     }
-                } else {
-                    urns_bn[urn2] += 1;
-                    if urns_bn[urn2] > max_balls_bn {
-                        max_balls_bn = urns_bn[urn2];
-                    }
+                } else if urns_bn[urn2] > max_balls_bn {
+                    max_balls_bn = urns_bn[urn2];
                 }
             }
 
-            // Zapisujemy wyniki
             writeln!(an_file, "{} {}", n, max_balls_an).unwrap();
             writeln!(bn_file, "{} {}", n, max_balls_bn).unwrap();
         }
