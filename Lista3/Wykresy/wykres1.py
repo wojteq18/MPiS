@@ -27,15 +27,15 @@ try:
     # Tworzenie wykresu
     plt.figure(figsize=(10, 6))
 
-    # Wykres punktowy - wszystkie dane
-    #plt.scatter(points, estimates, color='blue', s=10, alpha=0.7, label="Punkty (oszacowania)")
+    # Wykres średnich wartości dla każdej liczby punktów (linia z kropkami)
+    plt.plot(mean_points, mean_estimates, color='red', marker='o', label="Średnia")
 
-    # Wykres średnich wartości dla każdej liczby punktów (czerwone kropki)
-    plt.scatter(mean_points, mean_estimates, color='red', s=50, zorder=5, label="Średnia")
+    # Dodanie etykiet na osi X
+    xticks = [10**3, 10**5, 10**6]  # Punkty na osi X
+    plt.xticks(ticks=xticks, labels=[r'$10^3$', r'$10^5$', r'$10^6$'])  # Ustawienie etykiet
 
     # Dodanie etykiet i tytułu
     plt.xlabel("n")
-    #plt.ylabel("Liczba losowań")
     plt.title(plot_title)  # Użycie tytułu podanego przez użytkownika
     plt.legend()
     plt.grid(True)
