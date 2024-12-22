@@ -57,7 +57,7 @@ pub fn calculate(n_values: Vec<usize>, repeats: usize) {
 
 fn main() {
     let n_values: Vec<usize> = (10000..=1000000).step_by(10000).collect(); // Zakres wartości n
-    let repeats = 5; // Ilość powtórzeń dla każdej wartości n
+    let repeats = 50; // Ilość powtórzeń dla każdej wartości n
 
     calculate(n_values, repeats);
 }
