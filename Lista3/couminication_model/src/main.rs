@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::{Write, BufWriter};
 
 fn caulculate(n: i32, p: f64, file: &mut BufWriter<File>) {
-    let mut rng = Mt64::default();
+    let mut rng = Mt64::new(rand::thread_rng().gen()); // Losowe ziarno w funkcji
     let mut knots = vec![0; n as usize];
     let mut arrived: i32 = 0;
     let mut repetitions = 0;
@@ -29,8 +29,8 @@ fn main() {
     let mut file = BufWriter::new(File::create("results.txt").unwrap());
 
     for &n in n_values.iter() {
-        caulculate(n, p, &mut file);
+        for _ in 0..50 {
+            caulculate(n, p, &mut file);
+        }
     }
 }
-
-    
