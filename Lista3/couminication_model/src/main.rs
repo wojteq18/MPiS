@@ -25,12 +25,12 @@ fn caulculate(n: i32, p: f64, file: &mut BufWriter<File>) {
 
 fn main() {
     let n_values: Vec<i32> = (10000..=1000000).step_by(10000).collect();
-    let p = 0.5;
+    let p = 0.1;
     let mut file = BufWriter::new(File::create("results.txt").unwrap());
 
     for &n in n_values.iter() {
-        for _ in 0..50 {
-            caulculate(n, p, &mut file);
+        for i in 0..50 {
+            caulculate(n, p, &mut file);      
         }
     }
 }
