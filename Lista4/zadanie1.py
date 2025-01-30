@@ -8,10 +8,7 @@ p = 0.5
 
 # Wyliczamy prawą część nierówności Czebyszewa
 def chebyshev_bound(n):
-    mean = n * p
-    var = n * p * (1 - p)
-    threshold = mean / 10
-    return var / threshold**2
+    return 100 / n #var(x) / (0.1E(X))^2 = np(1 - p) / (0.01(np)^2) = 1 - p / 0.01np = 100/n
 
 # Obliczenia
 results = []
@@ -26,11 +23,11 @@ for n in n_values:
 
     # Obliczenia dla exact_b
     threshold_b = 0.1 * E_x
-    k = threshold_b  # Użycie progu jako k
-    exact_b = binom.cdf(E_x + k - 1, n, p) - binom.cdf(E_x - k, n, p)
+    #k = threshold_b  # Użycie progu jako k
+    exact_b = binom.sf(E_x + threshold_b - 1, n, p) + binom.cdf(E_x - threshold_b, n, p)
 
     # Czebyszew
-    chebyshev_value = chebyshev_bound(n)  # Zmienna z unikalną nazwą
+    chebyshev_value = chebyshev_bound(n)  
 
     # Dodanie wyników do listy
     results.append({
